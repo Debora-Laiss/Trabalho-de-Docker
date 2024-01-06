@@ -1,0 +1,13 @@
+Para instalar o Docker em uma instância EC2 da AWS, você pode usei um script de inicialização (user_data.sh). Este script será executado quando a instância EC2 for iniciada.
+Este script irá atualizar os pacotes do sistema, instalar o Docker, iniciar o serviço Docker, adicionar o usuário ec2-user ao grupo Docker e definir as permissões corretas para o socket Docker.
+Para garantir que o Docker seja iniciado automaticamente sempre que a instância EC2 for reiniciada, usei o comando ao final do seu script de inicialização: sudo systemctl enable docker
+Usei o docker version para verificar se o Docker foi instalado corretamente, você pode adicionar o seguinte comando ao final do seu script de inicialização:
+
+#!/bin/bash
+sudo yum update -y
+sudo yum -y install docker
+sudo service docker start
+sudo usermod -a -G docker ec2-user
+sudo chmod 666 /var/run/docker.sock
+sudo systemctl enable docker
+docker version

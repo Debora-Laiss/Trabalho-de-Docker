@@ -23,3 +23,24 @@ sudo curl -L "https://github.com/docker/compose/releases/download/v2.11.2/docker
 sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
+
+
+
+database-1.cjjl6z4fjxwf.us-east-1.rds.amazonaws.com
+
+version: '3.1'
+ 
+services:
+ 
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: database-1.cjjl6z4fjxwf.us-east-1.rds.amazonaws.com
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: bancoDL
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - /root/wordpress:/var/www/html

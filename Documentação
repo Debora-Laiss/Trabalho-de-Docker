@@ -1,7 +1,8 @@
-Para instalar o Docker em uma instância EC2 da AWS, você pode usei um script de inicialização (user_data.sh). Este script será executado quando a instância EC2 for iniciada.
+Para instalar o Docker em uma instância EC2 da AWS,  usei um script de inicialização (user_data.sh). Este script será executado quando a instância EC2 for iniciada.
 Este script irá atualizar os pacotes do sistema, instalar o Docker, iniciar o serviço Docker, adicionar o usuário ec2-user ao grupo Docker e definir as permissões corretas para o socket Docker.
 Para garantir que o Docker seja iniciado automaticamente sempre que a instância EC2 for reiniciada, usei o comando ao final do seu script de inicialização: sudo systemctl enable docker
-Usei o docker version para verificar se o Docker foi instalado corretamente, você pode adicionar o seguinte comando ao final do seu script de inicialização:
+Usei o docker version para verificar se o Docker foi instalado corretamente, você pode adicionar o seguinte comando ao final do seu script de inicialização: docker version
+
 
 #!/bin/bash
 sudo yum update -y
@@ -11,3 +12,14 @@ sudo usermod -a -G docker ec2-user
 sudo chmod 666 /var/run/docker.sock
 sudo systemctl enable docker
 docker version
+
+Baixei tambem o docker compose
+Primeiro, baixe o binário mais recente do Docker Compose diretamente do GitHub. Para fazer isso, usei o comando curl. Certifique-se de substituir v2.11.2 pela versão desejada do Docker Compose.
+Após o download, aplique permissões de execução ao binário com o comando chmod
+Para verificar se o Docker Compose foi instalado corretamente, você pode verificar a versão do Docker Compose com o seguinte comando: docker-compose --version
+
+
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+

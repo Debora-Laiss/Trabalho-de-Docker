@@ -24,7 +24,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 
 
-
+2. Efetuar Deploy de uma aplicação Wordpress com: container de aplicação RDS database Mysql
 
 database-1.cjjl6z4fjxwf.us-east-1.rds.amazonaws.com
 
@@ -44,3 +44,8 @@ services:
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - /root/wordpress:/var/www/html
+
+
+3. configuração da utilização do serviço
+EFS AWS para estáticos do container
+de aplicação Wordpress
